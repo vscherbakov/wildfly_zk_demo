@@ -2,12 +2,9 @@ package com.vvs.javaee.ui.address;
 
 import com.vvs.javaee.dao.AddressDao;
 import com.vvs.javaee.model.Address;
-import org.zkoss.bind.ValidationContext;
-import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.validator.AbstractValidator;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
@@ -15,7 +12,7 @@ import javax.naming.NamingException;
 
 import static java.util.Objects.isNull;
 
-public class newAddressViewModel {
+public class NewAddressViewModel {
     @EJB
     private AddressDao addressDao;
 

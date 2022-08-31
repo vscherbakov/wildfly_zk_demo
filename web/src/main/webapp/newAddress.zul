@@ -5,7 +5,7 @@
         <include id="menu" src="menu.zul"/>
         <div apply="org.zkoss.bind.BindComposer"
              validationMessages="@id('vmsgs')"
-             viewModel="@id('vm') @init('com.vvs.javaee.ui.address.newAddressViewModel')">
+             viewModel="@id('vm') @init('com.vvs.javaee.ui.address.NewAddressViewModel')">
             <grid>
                 <columns>
                     <column width="300px" label="Адрес"/>

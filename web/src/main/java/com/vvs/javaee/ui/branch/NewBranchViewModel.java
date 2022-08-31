@@ -17,7 +17,7 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-public class newBranchViewModel {
+public class NewBranchViewModel {
     @EJB
     private BranchDao branchDao;
 
