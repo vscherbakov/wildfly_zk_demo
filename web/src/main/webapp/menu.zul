@@ -10,6 +10,8 @@
             <menu label="Просмотреть ...">
                 <menupopup>
                     <menuitem label="Компании" href="listCompanies.zul" />
+                    <menuitem label="Филиалы" href="listBranches.zul" />
+                    <menuitem label="Адреса" href="listAddresses.zul" />
                 </menupopup>
             </menu>
         </menubar>

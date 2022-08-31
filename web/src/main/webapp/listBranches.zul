@@ -5,15 +5,14 @@
         <include id="menu" src="menu.zul"/>
         <div apply="org.zkoss.bind.BindComposer"
              validationMessages="@id('vmsgs')"
-             viewModel="@id('vm') @init('com.vvs.javaee.ui.company.ListCompaniesViewModel')">
+             viewModel="@id('vm') @init('com.vvs.javaee.ui.company.ListBranchesViewModel')">
             <grid model="@bind(vm.listModel)" mold="paging" pageSize="5">
                 <auxhead>
-                    <auxheader label="Компания" align="center" colspan="2" />
+                    <auxheader label="Компания" align="center" colspan="1" />
                     <auxheader label="Адрес" align="center" colspan="5" />
                 </auxhead>
                 <columns>
                     <column label="Название" align="center" />
-                    <column label="Форма" align="center"  />
                     <column label="Индекс" align="center" />
                     <column label="Город" align="center" />
                     <column label="Улица" align="center" />
@@ -23,7 +22,6 @@
                 <template name="model">
                     <row>
                         <label value="${each.name}" />
-                        <label value="${each.kind}" />
                         <label value="${each.address.postIndex}" />
                         <label value="${each.address.city}" />
                         <label value="${each.address.street}" />

@@ -36,6 +36,6 @@ public class ListCompaniesViewModel {
         return listModel;
     }
     public void setListModel(List<Company> listModel) { this.listModel = listModel; }
-    private List<Company> listModel = new ArrayList<>();
+    private List<Company> listModel;
 }
 
