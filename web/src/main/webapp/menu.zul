@@ -1,0 +1,16 @@
+<zk xmlns:n="native">
+        <menubar id="menubar" orient="vertical" autodrop="true">
+            <menu label="Создать ...">
+                <menupopup>
+                    <menuitem label="Адрес" href="newAddress.zul" />
+                    <menuitem label="Филиал" href="newBranch.zul" />
+                    <menuitem label="Компанию" href="newCompany.zul" />
+                </menupopup>
+            </menu>
+            <menu label="Просмотреть ...">
+                <menupopup>
+                    <menuitem label="Компании" href="listCompanies.zul" />
+                </menupopup>
+            </menu>
+        </menubar>
+</zk>

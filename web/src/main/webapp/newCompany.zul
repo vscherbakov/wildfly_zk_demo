@@ -1,0 +1,108 @@
+<zk xmlns:x="xhtml">
+    <style src="style.css"/>
+    <x:h1 class="title">Тестовое задание - демонстрация Wildfly + ZKoss + MySQL</x:h1>
+    <hbox>
+        <include id="menu" src="menu.zul"/>
+        <div apply="org.zkoss.bind.BindComposer"
+             validationMessages="@id('vmsgs')"
+             viewModel="@id('vm') @init('com.vvs.javaee.ui.company.NewCompanyViewModel')">
+            <grid>
+                <columns>
+                    <column width="300px" label="Компания"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Название компании"/>
+                        <hlayout>
+                            <textbox id="name_box" width="300px"
+                                     constraint="no empty"
+                                     maxlength="64"
+                                     value="@load(vm.company.name) @save(vm.company.name, before='save')"/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Правовая форма"/>
+                        <bandbox id="bd1" mold="rounded" autodrop="true" width="450px"
+                                 constraint="no empty" value="@load(vm.company.kind) @save(vm.company.kind, before='save')">
+                            <bandpopup>
+                                <listbox id="company_type_select" width="450px"  mold="paging" autopaging="true"
+                                         onSelect="bd1.value=self.selectedItem.label; bd1.close();"
+                                         model="@bind(vm.kindModel)">
+                                    <template name="model">
+                                        <listitem>
+                                            <listcell label="@bind(each)"></listcell>
+                                        </listitem>
+                                    </template>
+                                </listbox>
+                            </bandpopup>
+                        </bandbox>
+                    </row>
+                    <row>
+                        <label value="Адрес"/>
+                        <bandbox id="bd2" mold="rounded" autodrop="true" width="450px"
+                                 constraint="no empty"
+                                 value="@load(vm.selectedAddress) @save(vm.company.address, before='save') @converter(vm.addressConverter)">
+                            <bandpopup>
+                                <listbox height="250px" width="450px" mold="paging" autopaging="true"
+                                         selectedItem="@bind(vm.selectedAddress)"
+                                         onSelect="bd2.close();"
+                                         model="@bind(vm.addressModel)">
+                                    <listhead>
+                                        <listheader label="Город"/>
+                                        <listheader label="Удица"/>
+                                        <listheader label="Дом"/>
+                                    </listhead>
+                                    <template name="model">
+                                        <listitem>
+                                            <listcell label="@bind(each.city)"></listcell>
+                                            <listcell label="@bind(each.street)"></listcell>
+                                            <listcell label="@bind(each.building)"></listcell>
+                                        </listitem>
+                                    </template>
+                                </listbox>
+                            </bandpopup>
+                        </bandbox>
+                    </row>
+                    <row>
+                        <label value="Филиалы"/>
+                        <vlayout>
+                            <hlayout>
+                                <selectbox id="branch_select" model="@bind(vm.branchModel)"
+                                           selectedItem="@bind(vm.selectedBranch)"
+                                           width="450px"
+                                           style="height:36px;line-height:36px;background:#f4f4f4;">
+                                    <template name="model">
+                                        <label value="${each.name}"/>
+                                    </template>
+                                </selectbox>
+                                <button label="Добавить"
+                                        onClick="@command('addBranch')"/>
+                                <button label="Удалить" onClick="@command('deleteBranch')"/>
+                            </hlayout>
+                            <listbox id="branch_list" rows="5" model="@bind(vm.companyBranches)"
+                                     selectedItem="@bind(vm.selectedInGrid)">
+                                <template name="model">
+                                    <listitem>
+                                        <listcell label="@bind(each.name)"></listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </vlayout>
+                    </row>
+                    <row>
+                        <cell colspan="2" style="text-align:center">
+                            <vlayout>
+                                <label visible="@load(empty vmsgs)"
+                                       value="@load(empty vmsgs ? 'Компания создана!' : '', before='save')" />
+                                <button label="Сохранить"
+                                        onClick="@command('save')"
+                                        width="150px"/>
+                            </vlayout>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+        </div>
+    </hbox>
+</zk>

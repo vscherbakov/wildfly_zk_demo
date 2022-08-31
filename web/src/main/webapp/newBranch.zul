@@ -1,0 +1,68 @@
+<zk xmlns:x="xhtml">
+    <style src="style.css"/>
+    <x:h1 class="title">Тестовое задание - демонстрация Wildfly + ZKoss + MySQL</x:h1>
+    <hbox>
+        <include id="menu" src="menu.zul"/>
+        <div apply="org.zkoss.bind.BindComposer"
+             validationMessages="@id('vmsgs')"
+             viewModel="@id('vm') @init('com.vvs.javaee.ui.branch.newBranchViewModel')">
+            <grid>
+                <columns>
+                    <column width="300px" label="Филиал"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Название филиала"/>
+                        <hlayout>
+                            <textbox id="name_box" width="300px"
+                                     constraint="no empty"
+                                     value="@load(vm.branch.name) @save(vm.branch.name, before='save')"/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Адрес"/>
+                        <bandbox id="bd" mold="rounded" autodrop="true" width="550px"
+                                 constraint="no empty"
+                                 value="@load(vm.selectedAddress) @save(vm.branch.address, before='save') @converter(vm.addressConverter)">
+                            <bandpopup>
+                                <listbox height="250px" width="550px" mold="paging" autopaging="true"
+                                         selectedItem="@bind(vm.selectedAddress)"
+                                         onSelect="bd.close();"
+                                         model="@bind(vm.addressModel)">
+                                    <listhead>
+                                        <listheader label="Индекс"/>
+                                        <listheader label="Город"/>
+                                        <listheader label="Удица"/>
+                                        <listheader label="Дом"/>
+                                        <listheader label="Квартира"/>
+                                    </listhead>
+                                    <template name="model">
+                                        <listitem>
+                                            <listcell label="@bind(each.postIndex)"></listcell>
+                                            <listcell label="@bind(each.city)"></listcell>
+                                            <listcell label="@bind(each.street)"></listcell>
+                                            <listcell label="@bind(each.building)"></listcell>
+                                            <listcell label="@bind(each.apartment)"></listcell>
+                                        </listitem>
+                                    </template>
+                                </listbox>
+                            </bandpopup>
+                        </bandbox>
+                    </row>
+                    <row>
+                        <cell colspan="2" style="text-align:center">
+                            <vlayout>
+                                <label visible="@load(empty vmsgs)"
+                                       value="@load(empty vmsgs ? 'Филиал создан!' : '', before='save')" />
+                                <button label="Сохранить"
+                                        onClick="@command('save')"
+                                        width="150px"/>
+                            </vlayout>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+        </div>
+    </hbox>
+</zk>

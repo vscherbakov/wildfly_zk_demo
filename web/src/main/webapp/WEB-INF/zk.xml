@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+    <library-property>
+        <name>org.zkoss.theme.preferred</name>
+        <value>iceblue_c</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.web.preferred.locale</name>
+        <value>ru</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.bind.DebuggerFactory.enable</name>
+        <value>true</value>
+    </library-property>
+</zk>

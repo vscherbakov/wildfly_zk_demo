@@ -1,0 +1,73 @@
+<zk xmlns:x="xhtml">
+    <style src="style.css"/>
+    <x:h1 class="title">Тестовое задание - демонстрация Wildfly + ZKoss + MySQL</x:h1>
+    <hbox>
+        <include id="menu" src="menu.zul"/>
+        <div apply="org.zkoss.bind.BindComposer"
+             validationMessages="@id('vmsgs')"
+             viewModel="@id('vm') @init('com.vvs.javaee.ui.address.newAddressViewModel')">
+            <grid>
+                <columns>
+                    <column width="300px" label="Адрес"/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Индекс"/>
+                        <hlayout>
+                            <textbox id="index_box" width="300px"
+                                     maxlength="8"
+                                     constraint="/[0-9]*/: Допустимы только цифры"
+                                     value="@load(vm.address.postIndex) @save(vm.address.postIndex, before='save') "/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Город"/>
+                        <hlayout>
+                            <textbox id="city_box" width="300px" constraint="no empty"
+                                     maxlength="64"
+                                     value="@load(vm.address.city) @save(vm.address.city, before='save') "/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Улица"/>
+                        <hlayout>
+                            <textbox id="street_box" width="300px"
+                                     maxlength="64"
+                                     value="@load(vm.address.street) @save(vm.address.street, before='save'))"
+                                     constraint="no empty"/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Дом"/>
+                        <hlayout>
+                            <textbox id="building_box" width="300px"
+                                     value="@load(vm.address.building) @save(vm.address.building, before='save'))"
+                                     maxlength="8"
+                                     constraint="no empty"/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <label value="Квартира"/>
+                        <hlayout>
+                            <textbox id="apartment_box" width="300px"
+                                     maxlength="64"
+                                     value="@load(vm.address.apartment) @save(vm.address.apartment)"/>
+                        </hlayout>
+                    </row>
+                    <row>
+                        <cell colspan="2" style="text-align:center">
+                            <vlayout>
+                                <label visible="@load(empty vmsgs)"
+                                       value="@load(empty vmsgs ? 'Адрес создан!' : '', before='save')" />
+                                <button label="Сохранить"
+                                        onClick="@command('save')"
+                                        width="150px"/>
+                            </vlayout>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+        </div>
+    </hbox>
+</zk>

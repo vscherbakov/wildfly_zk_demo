@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+    <changeSet author="vs" id="2021-02-07-create-contact-table" context="development">
+        <createTable tableName="address" schemaName="sample">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postIndex" type="VARCHAR(8)"/>
+            <column name="city" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="building" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apartment" type="VARCHAR(32)"/>
+        </createTable>
+        <createTable tableName="branch" schemaName="sample">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id">
+                <constraints nullable="false" foreignKeyName="fk_branch_addresses_address_id" references="address(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="company" schemaName="sample">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kind" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id">
+                <constraints nullable="false" foreignKeyName="fk_branch_addresses_address_id" references="address(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
